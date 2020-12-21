@@ -49,9 +49,8 @@ class ModuleRef(ffi.ObjectRef):
     A reference to a LLVM module.
     """
 
-    def __init__(self, module_ptr, context):
+    def __init__(self, module_ptr):
         super(ModuleRef, self).__init__(module_ptr)
-        self._context = context
 
     def __str__(self):
         with ffi.OutputString() as outstr:
@@ -198,7 +197,7 @@ class ModuleRef(ffi.ObjectRef):
         return _TypesIterator(it, dict(module=self))
 
     def clone(self):
-        return ModuleRef(ffi.lib.LLVMPY_CloneModule(self), self._context)
+        return ModuleRef(ffi.lib.LLVMPY_CloneModule(self))
 
 
 class _Iterator(ffi.ObjectRef):
