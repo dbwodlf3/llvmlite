@@ -59,6 +59,20 @@ class TypeRef(ffi.ObjectRef):
         Returns true is the type is a pointer type.
         """
         return ffi.lib.LLVMPY_TypeIsPointer(self)
+    
+    @property
+    def is_constant(self):
+        """
+        Returns true is the value is Constant.
+        """
+        return ffi.lib.LLVMPY_ValueIsConstant(self)
+    
+    @property
+    def is_constant_expr(self):
+        """
+        Returns true is the value is ConstantExpr.
+        """
+        return ffi.lib.LLVMPY_ValueIsConstantExpr(self)
 
     @property
     def element_type(self):
@@ -427,6 +441,12 @@ ffi.lib.LLVMPY_PrintType.restype = c_void_p
 
 ffi.lib.LLVMPY_TypeIsPointer.argtypes = [ffi.LLVMTypeRef]
 ffi.lib.LLVMPY_TypeIsPointer.restype = c_bool
+
+ffi.lib.LLVMPY_ValueIsConstant.argtypes = [ffi.LLVMValueRef]
+ffi.lib.LLVMPY_ValueIsConstant.restype = c_bool
+
+ffi.lib.LLVMPY_ValueIsConstantExpr.argtypes = [ffi.LLVMValueRef]
+ffi.lib.LLVMPY_ValueIsConstantExpr.restype = c_bool
 
 ffi.lib.LLVMPY_GetElementType.argtypes = [ffi.LLVMTypeRef]
 ffi.lib.LLVMPY_GetElementType.restype = ffi.LLVMTypeRef
