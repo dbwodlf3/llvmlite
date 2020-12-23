@@ -414,6 +414,28 @@ LLVMPY_TypeIsPointer(LLVMTypeRef type)
     return llvm::unwrap(type)->isPointerTy();
 }
 
+API_EXPORT(bool)
+LLVMPY_ValueIsConstant(LLVMValueRef Val)
+{
+    if(dyn_cast<Constant>(unwrap(Val))) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+API_EXPORT(bool)
+LLVMPY_ValueIsConstantExpr(LLVMValueRef Val)
+{
+    if(dyn_cast<ConstantExpr>(unwrap(Val))) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
 API_EXPORT(LLVMTypeRef)
 LLVMPY_GetElementType(LLVMTypeRef type)
 {
